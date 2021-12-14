@@ -1,0 +1,6 @@
+.list-item {
+    display: flex;
+    flex-direction: column;
+    height: 7em;
+    margin: 2em 4em;
+}

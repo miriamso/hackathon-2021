@@ -1,26 +1,14 @@
-import logo from './logo.svg';
-import Background from './assets/background.svg'
-
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Main from "./main";
 
 function App() {
   return (
-    <div className="App" style={{ background: `url(${Background})` }}>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/:vulname" element={<Main></Main>}></Route>
+        <Route path="/" element={<Main></Main>}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
