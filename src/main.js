@@ -2,31 +2,48 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Typography, Tabs, Tab } from "@mui/material";
 import { TabContext, TabPanel } from "@mui/lab";
-// import ListItem from "./listItem";
 import Background from "./assets/background.svg";
-// import Tab from "@mui/material/Tab";
-import Img from "./assets/listImage.svg";
+import InfoIcon from "./assets/infoIcon.svg";
+import LessonsIcon from "./assets/lessonsIcon.svg";
+import StackIcons from "./assets/stackIcons.svg";
+import {Link} from '@mui/icons-material'
 import data from "./dmsData.json";
-// import Tabs from "@mui/material/Tabs";
 import "./App.css";
 
 const Main = () => {
   let params = useParams();
   const [value, setValue] = useState("2");
-  const dataItem = data.find((x) => x.id === parseInt(params.vulname, 10));
+  const queryId = parseInt(params.vulname, 10) || 1503;
+  const dataItem = data.find((x) => x.id === queryId);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <div className="App" style={{ background: `url(${Background})`, backgroundRepeat: "no-repeat" }}>
+    <div
+      className="App"
+      style={{
+        background: `url(${Background})`,
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <header className="App-header">
-        <Typography variant="h3" component="div" gutterBottom>
-          We got you covered
-        </Typography>
-        <Typography variant="h4" component="div" gutterBottom>
+        <Typography
+          variant="h3"
+          component="div"
+          gutterBottom
+          className="vul-name"
+        >
           {dataItem?.name.replaceAll("_", " ")}
+        </Typography>
+        <Typography
+          variant="h4"
+          component="div"
+          gutterBottom
+          className="sub-title"
+        >
+          We got you covered
         </Typography>
 
         <TabContext value={value}>
@@ -36,39 +53,42 @@ const Main = () => {
             aria-label="icon label tabs example"
           >
             <Tab
-              icon={<img src={Img} alt="" />}
+              icon={<img src={InfoIcon} alt="" />}
               label={"Genaral informatoion"}
               value={"1"}
             />
             <Tab
-              icon={<img src={Img} alt="" />}
+              icon={<img src={LessonsIcon} alt="" />}
               label={"Lessons"}
               value={"2"}
             />
             <Tab
-              icon={<img src={Img} alt="" />}
+              icon={<img src={StackIcons} alt="" />}
               label={"Stackoverflow results"}
               value={"3"}
             />
           </Tabs>
           <TabPanel value="1" className="tab-1">
-            <Typography variant="h6" component="div" gutterBottom>
-              Description
-            </Typography>
-            <div>{dataItem?.resultDescription}</div>
-            <Typography variant="h6" component="div" gutterBottom>
-            Risk
-            </Typography>
-            <div>{dataItem?.risk}</div>
-            <Typography variant="h6" component="div" gutterBottom>
-            Cause
-            </Typography>
-            <div>{dataItem?.cause}</div>
+            <a className="link"><Link className="aa"></Link> CWE-1503</a>
+            <div className="infor-title">
+              Description \
+              <span className="sub-title-span"> What might happen</span>
+            </div>
+            <div className="infor-desc">{dataItem?.resultDescription}</div>
+            <div className="infor-title">
+              Risk \ <span className="sub-title-span"> How does it happen</span>
+            </div>
+            <div className="infor-desc">{dataItem?.risk}</div>
+            <div className="infor-title">
+              Cause \ <span className="sub-title-span"> How to avoid it </span>
+            </div>
+            <div className="infor-desc">{dataItem?.cause}</div>
 
-            <Typography variant="h6" component="div" gutterBottom>
-            General Recommendations
-            </Typography>
-            <div>{dataItem?.generalRecommendations}</div>
+            <div className="infor-title">
+              General Recommendations \{" "}
+              <span className="sub-title-span"> What can be done </span>
+            </div>
+            <div className="infor-desc">{dataItem?.generalRecommendations}</div>
           </TabPanel>
           <TabPanel value="2">Item Two</TabPanel>
           <TabPanel value="3">Item Three</TabPanel>
